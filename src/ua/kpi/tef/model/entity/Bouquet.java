@@ -1,7 +1,7 @@
 package ua.kpi.tef.model.entity;
 
-import java.util.List;
+public abstract class Bouquet {
+    public abstract String getDescription();
 
-public class Bouquet {
-    private List<Flower> flowers;
+    public abstract double cost();
 }
