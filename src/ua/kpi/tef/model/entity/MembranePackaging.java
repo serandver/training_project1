@@ -1,5 +1,7 @@
 package ua.kpi.tef.model.entity;
 
+import ua.kpi.tef.view.View;
+
 public class MembranePackaging extends BouquetDecorator {
     private Bouquet bouquet;
 
@@ -9,7 +11,7 @@ public class MembranePackaging extends BouquetDecorator {
 
     @Override
     public String getDescription() {
-        return bouquet.getDescription() + ", membrane packaging";
+        return View.concatString(bouquet.getDescription(), View.bundle.getString(View.MEMBRANE_PACKAGING_DESCRIPTION));
     }
 
     @Override

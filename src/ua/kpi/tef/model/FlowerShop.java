@@ -2,6 +2,11 @@ package ua.kpi.tef.model;
 
 import ua.kpi.tef.model.entity.*;
 import ua.kpi.tef.model.factory.FlowerBouquetFactory;
+import ua.kpi.tef.view.View;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class FlowerShop {
 
@@ -11,24 +16,29 @@ public class FlowerShop {
         return factory.createBouquet(flower, size, amount);
     }
 
-    public Bouquet addFlowersToBouquet(Bouquet bouquet, FlowerType flower, FlowerSize size, int amount) {
+    public FlowerBouquet addFlowersToBouquet(FlowerBouquet bouquet, FlowerType flower, FlowerSize size, int amount) {
         return factory.addFlowersToBouquet(bouquet, flower, size, amount);
-
     }
 
     public void orderBouquet(Bouquet bouquet) {
-        System.out.println( bouquet.getDescription() + " = UAH" + bouquet.cost());
+        View.print( View.concatString(bouquet.getDescription(),
+                View.NEW_LINE, View.SUM, View.bundle.getString(View.CURRENT_CURRENCY), String.valueOf(bouquet.cost())));
     }
 
-    public static void main(String[] args) {
-        FlowerShop flowerShop = new FlowerShop();
+    public void sortFlowers(FlowerBouquet bouquet) {
+        Collections.sort(bouquet.getFlowers());
+    }
 
-        Bouquet bouquet = flowerShop.createBouquet(FlowerType.RED_ROSE, FlowerSize.BIG, 15);
-        bouquet = flowerShop.addFlowersToBouquet(bouquet, FlowerType.WHITE_ROSE, FlowerSize.BIG, 30);
-
-        bouquet = new PaperPackaging(bouquet);
-        bouquet = new Ribbon(bouquet);
-
-        flowerShop.orderBouquet(bouquet);
+    public FlowerBouquet getFlowersBySize(FlowerBouquet bouquet, FlowerSize size) {
+        List<Flower> flowers = bouquet.getFlowers();
+        List<Flower> flowersBySize = new ArrayList<>();
+        FlowerBouquet bouquetBySize = new FlowerBouquet();
+        for (Flower flower: flowers) {
+            if (flower.getSize() == size) {
+                flowersBySize.add(flower);
+            }
+        }
+        bouquetBySize.addFlowers(flowersBySize);
+        return bouquetBySize;
     }
 }

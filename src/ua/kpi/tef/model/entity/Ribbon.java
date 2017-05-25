@@ -1,5 +1,7 @@
 package ua.kpi.tef.model.entity;
 
+import ua.kpi.tef.view.View;
+
 public class Ribbon extends BouquetDecorator {
     private Bouquet bouquet;
 
@@ -9,7 +11,7 @@ public class Ribbon extends BouquetDecorator {
 
     @Override
     public String getDescription() {
-        return bouquet.getDescription() + ", tied with ribbon";
+        return View.concatString(bouquet.getDescription(), View.bundle.getString(View.RIBBON_DESCRIPTION));
     }
 
     @Override

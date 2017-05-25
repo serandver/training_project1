@@ -1,9 +1,8 @@
 package ua.kpi.tef.model.entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import ua.kpi.tef.view.View;
+
+import java.util.*;
 
 public class FlowerBouquet extends Bouquet {
     private List<Flower> flowers;
@@ -27,7 +26,7 @@ public class FlowerBouquet extends Bouquet {
         for (Flower flower: flowers) {
             price += flower.cost();
         }
-        return price;
+        return Math.round(price);
     }
 
     @Override
@@ -41,8 +40,17 @@ public class FlowerBouquet extends Bouquet {
             flowersMap.put(flowerName, count + 1);
         }
         for (Map.Entry<String, Integer> amountOfFlowers: flowersMap.entrySet()) {
-            builder.append(amountOfFlowers.getKey() + ", " + amountOfFlowers.getValue() + "pcs ");
+            builder.append(amountOfFlowers.getKey());
+            builder.append(View.SPACE);
+            builder.append(amountOfFlowers.getValue());
+            builder.append(View.PIECES);
+            builder.append(View.COMA);
+            builder.append(View.SPACE);
         }
         return builder.toString();
+    }
+
+    public List<Flower> getFlowers() {
+        return flowers;
     }
 }

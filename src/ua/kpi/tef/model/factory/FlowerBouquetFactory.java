@@ -22,9 +22,9 @@ public class FlowerBouquetFactory {
         return flowers;
     }
 
-    public Bouquet addFlowersToBouquet(Bouquet bouquet, FlowerType flower, FlowerSize size, int amount) {
+    public FlowerBouquet addFlowersToBouquet(FlowerBouquet bouquet, FlowerType flower, FlowerSize size, int amount) {
         List<Flower> flowers = getListOfFlowers(flower, size, amount);
-        FlowerBouquet flowerBouquet = (FlowerBouquet)bouquet;
+        FlowerBouquet flowerBouquet = bouquet;
         flowerBouquet.addFlowers(flowers);
         return flowerBouquet;
     }
